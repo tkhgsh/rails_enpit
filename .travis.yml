@@ -2,8 +2,15 @@ language: ruby
 rvm:
 - 2.2.5
 addons:
-  postgresql: "9.3"
+  postgresql: '9.3'
 before_script:
-  - psql -c 'create database travis_ci_test;' -U postgres
-  - cp config/database.yml.travis config/database.yml
-  - bin/rake db:migrate RAILS_ENV=test # いらない？
+- psql -c 'create database travis_ci_test;' -U postgres
+- cp config/database.yml.travis config/database.yml
+- bin/rake db:migrate RAILS_ENV=test
+deploy:
+  provider: heroku
+  api_key:
+    secure: WAbDBTkn/g5m6mZDOzowVyI0jVNw/tgYuyMMSNlqFHWNtgQ15VCwqhRXIOz97O6Hmqn97CpLDzMaszAi+e+Fm7aXGNjTgVkCCyPKQ5u8b3U3MIpMJ1LVL+oFijSeXuzihv4iO6onrft3YyC3W3Qc0Qbqwtea4VQwaXU2jaZO7D8/gsBzNqVDDEUhCWqgqXkK9WHGImkZe82FIvzFMBm3BhjXy800C+pUFcWYtBAy9Ihj12s6mrOPci7suegg060M2QDruB9etE2vpRGAPFOdgS2VjrTcGsHPU7ZMeQ/QdVcL/tZ3N0pooc5DdUIpxpjB5+L2/BEpW8NmZFVoSvLGkq/v+NxtNxpeeFw7Zu8hDqe2pk8S26K6zNOwPvcM6I5FhMUpwlznq8ovgAGGRnS0K4ETc4Gx92FiG7Zi1E9qRzQTrLN0hLFTP4mijA6zQBCO4Ss726XucA2C7IFGNcklSTGrnQ4+bo+OLcSnpJWKwYktXRaCeUDsEGhObCzgPzEkCof9Okg/7587epNkY2te2nvUT5xGEwNK9M8E2DFsm2NVWaAygIkP0D7vNH6Hd6a30AxILzIXcpiqrPOdvNtTs1iS+2OnkS+3rD6Tfexde5QHRaGCyUoOMR7jT/WPfPoMAXo5fEL+TjwPCVWz9Ow9pvJ/YdUu8bm/qEfk715Et/4=
+  app: mighty-fjord-60815
+  on:
+    repo: tkhgsh/rails_enpit
